@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Регистрация нового клиента</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello, [[${#httpServletRequest.remoteUser}]]!</h1>
+        <p>Если у Вас есть роль MANAGER то это Ваша страница!!!</p>
+        <p>Это страница /registerClient</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Выйти из системы"/>
+        </form>
+    </body>
+</html>
