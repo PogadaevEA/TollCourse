@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class PointDTOTest {
 
-    private String expected = "{\"lat\":56.0,\"lon\":74.0,\"autoId\":\"o567gfd\",\"time\":1509896189290}";
+    private String expected = "{\"lat\":56.0,\"lon\":74.0,\"azimut\":20.0,\"speed\":40.0,\"autoId\":\"o567gfd\",\"time\":1509896189290}";
     private String autoId = "o567gfd";
 
     @Test
@@ -21,7 +21,10 @@ public class PointDTOTest {
         point.setLat(56);
         point.setLon(74);
         point.setAutoId("o567gfd");
+        point.setAzim(20.0);
+        point.setSpeed(40.0);
         point.setTime(System.currentTimeMillis());
+
         assertTrue(point.toJson().contains("\"lat\":56"));
         assertTrue(point.toJson().contains("\"time\":"));
         System.out.println(point.toJson());
