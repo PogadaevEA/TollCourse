@@ -25,8 +25,9 @@ public class ServerController {
 
     private PrintWriter printWriter;
 
+
     @PostConstruct
-    private void init(){
+    public void init(){
 
         try {
             printWriter = new PrintWriter("coordinates.txt");
@@ -54,7 +55,7 @@ public class ServerController {
     }
 
     @PreDestroy
-    private void destroy(){
+    public void destroy(){
         printWriter.close();
     }
 

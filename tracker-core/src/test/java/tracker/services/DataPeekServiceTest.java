@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(org.mockito.junit.MockitoJUnitRunner.class)
 public class DataPeekServiceTest {
 
     @InjectMocks
