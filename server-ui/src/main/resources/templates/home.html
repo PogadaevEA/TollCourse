@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Домашняя страница Spring Security</title>
+    </head>
+    <body>
+    <h1 th:inline="text">Welcome,  [[${#httpServletRequest.remoteUser}]]!</h1>
+
+        <p>Кликните <a th:href="@{/routes}">routes</a>, для просмотра поездок.</p>
+        <p>Кликните <a th:href="@{/payments}">payments</a>, для внесения оплаты.</p>
+        <p>Кликните <a th:href="@{/registerClient}">registerClient</a>, для регистрации нового клиента.</p>
+        <p>Кликните <a th:href="@{/registerManager}">registerManager</a>, для регистрации нового менеджера.</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Выйти из системы"/>
+        </form>
+    </body>
+</html>
