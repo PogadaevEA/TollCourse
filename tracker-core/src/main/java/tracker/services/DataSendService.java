@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -54,6 +55,10 @@ public class DataSendService {
                 log.info(record.toJson());
             } catch (JsonProcessingException jpe) {
                 jpe.printStackTrace();
+            }
+            catch (ResourceAccessException ex){
+                returnToQueue(record, "ResourceAccessException");
+                return;
             }
 
         }
