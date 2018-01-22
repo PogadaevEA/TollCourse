@@ -46,6 +46,11 @@ public class DataSendService {
                 HttpEntity<String> coordinates = new HttpEntity<String>(request, headers);
                 ResponseEntity<Boolean> answer = restTemplate.exchange("http://localhost:8080/coords", HttpMethod.POST, coordinates, Boolean.class);
 
+                if(!answer.getBody()){
+                    log.info("Bad answer. Returning of coordinates to queue");
+                    dataPeekService.putFirst(record);
+                }
+
                 log.info(record.toJson());
             } catch (JsonProcessingException jpe) {
                 jpe.printStackTrace();

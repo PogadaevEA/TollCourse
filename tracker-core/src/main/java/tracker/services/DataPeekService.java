@@ -41,4 +41,8 @@ public class DataPeekService {
         log.info("DataPeekService.put " + point.getAutoId() + " " + point.getLat() + " " + point.getLon());
         queue.put(point);
     }
+
+    public void putFirst(PointDTO record) throws  InterruptedException{
+        queue.putFirst(record);
+    }
 }
