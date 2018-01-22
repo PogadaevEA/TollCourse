@@ -47,15 +47,20 @@ public class DataSendService {
                 ResponseEntity<Boolean> answer = restTemplate.exchange("http://localhost:8080/coords", HttpMethod.POST, coordinates, Boolean.class);
 
                 if(!answer.getBody()){
-                    log.info("Bad answer. Returning of coordinates to queue");
-                    dataPeekService.putFirst(record);
+                    returnToQueue(record, "Server error. Returning of coordinates to queue");
+                    return;
                 }
 
                 log.info(record.toJson());
             } catch (JsonProcessingException jpe) {
                 jpe.printStackTrace();
             }
+
         }
 
+    }
+    private void returnToQueue(PointDTO record, String error) throws InterruptedException{
+        log.info(error);
+        dataPeekService.putFirst(record);
     }
 }
