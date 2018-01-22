@@ -1,11 +1,30 @@
-subprojects{
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library-distribution'
     apply plugin: 'java'
+    apply plugin: 'gradle-one-jar'
+    apply plugin: 'org.springframework.boot'
     repositories {
         mavenCentral()
         mavenLocal()
     }
-    dependencies {
+    dependencies{
+        compile group: 'org.springframework', name: 'spring-context', version: '4.3.9.RELEASE'
+        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
         testCompile group: 'junit', name: 'junit', version: '4.12'
+        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 }
 
@@ -18,35 +37,16 @@ project(':common') {
 }
 
 project(':server-core') {
-    apply plugin: 'java-library-distribution'
     dependencies {
         compile project(':common')
     }
 }
 
-apply plugin: 'gradle-one-jar'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-    }
-}
 
 project(':tracker-core') {
-    apply plugin: 'java-library-distribution'
-    apply plugin: 'gradle-one-jar'
     dependencies {
         compile project(':common')
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-        compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
-        testCompile group: 'junit', name: 'junit', version: '4.12'
-        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
-
     }
 
     task fatJarr(type: OneJar) {
@@ -56,14 +56,12 @@ project(':tracker-core') {
 
 
 project(':server-ui') {
-    apply plugin: 'java-library-distribution'
     dependencies {
         compile project(':common')
     }
 }
 
 project(':tracker-ui') {
-    apply plugin: 'java-library-distribution'
     dependencies {
         compile project(':common')
     }
